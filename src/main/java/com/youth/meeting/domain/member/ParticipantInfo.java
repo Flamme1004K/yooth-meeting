@@ -24,4 +24,9 @@ public class ParticipantInfo {
     public String getIntroduce() {
         return introduce;
     }
+
+    public void changeInfo(String dietaryRestrictions, String introduce) {
+        this.dietaryRestrictions = dietaryRestrictions;
+        this.introduce = introduce;
+    }
 }

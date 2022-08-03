@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.youth.meeting.domain.member.MemberStatus.PARTICIPANT;
+
 @Entity
 public class Member {
 
@@ -57,7 +59,7 @@ public class Member {
         this.name = name;
         this.gender = gender;
         this.participantInfo = new ParticipantInfo(dietaryRestrictions, introduce);
-        this.memberStatuses.add(MemberStatus.PARTICIPANT);
+        this.memberStatuses.add(PARTICIPANT);
     }
 
     public Long getNo() {
@@ -98,5 +100,12 @@ public class Member {
 
     public OrganizerInfo getOrganizerInfo() {
         return organizerInfo;
+    }
+
+    public void changeInfo(String dietaryRestrictions, String introduce) {
+        if(!memberStatuses.contains(PARTICIPANT)) {
+            throw new IllegalArgumentException("참가자 정보만 수정할 수 있습니다.");
+        }
+        this.participantInfo.changeInfo(dietaryRestrictions, introduce);
     }
 }

@@ -20,7 +20,7 @@ public class MemberInfoController {
     public ResponseEntity<MemberInfoResponse> findMemberInfo(
             @PathVariable("memberNo") Long memberNo
     ) {
-        MemberInfoResponse response = organizerMemberJoinService.findOrganizerMember(memberNo);
+        MemberInfoResponse response = organizerMemberJoinService.findMember(memberNo);
         return ResponseEntity.ok(response);
     }
 }
