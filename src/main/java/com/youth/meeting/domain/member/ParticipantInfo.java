@@ -16,4 +16,12 @@ public class ParticipantInfo {
         this.dietaryRestrictions = dietaryRestrictions;
         this.introduce = introduce;
     }
+
+    public String getDietaryRestrictions() {
+        return dietaryRestrictions;
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
 }

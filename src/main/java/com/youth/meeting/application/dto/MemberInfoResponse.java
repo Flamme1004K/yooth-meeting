@@ -2,7 +2,7 @@ package com.youth.meeting.application.dto;
 
 import java.time.LocalDate;
 
-public class OrganizerMemberJoinResponse {
+public class MemberInfoResponse {
 
     private Long no;
     private String loginId;
@@ -10,30 +10,25 @@ public class OrganizerMemberJoinResponse {
     private String name;
     private LocalDate birth;
     private String teamName;
+    private String dietaryRestrictions;
+    private String introduce;
 
-
-    public OrganizerMemberJoinResponse() {
+    public MemberInfoResponse() {
     }
 
-    public OrganizerMemberJoinResponse(Long no, String loginId) {
+    public MemberInfoResponse(Long no, String loginId) {
         this.no = no;
         this.loginId = loginId;
     }
 
-    public OrganizerMemberJoinResponse(Long no, String loginId, String email, String name, LocalDate birth, String teamName) {
+    public MemberInfoResponse(Long no, String loginId, String email, String name, LocalDate birth, String teamName, String dietaryRestrictions, String introduce) {
         this.no = no;
         this.loginId = loginId;
         this.email = email;
         this.name = name;
         this.birth = birth;
         this.teamName = teamName;
-    }
-
-    public Long getNo() {
-        return no;
-    }
-
-    public String getLoginId() {
-        return loginId;
+        this.dietaryRestrictions = dietaryRestrictions;
+        this.introduce = introduce;
     }
 }

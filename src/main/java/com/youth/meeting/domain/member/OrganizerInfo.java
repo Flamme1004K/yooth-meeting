@@ -12,4 +12,8 @@ public class OrganizerInfo {
     public OrganizerInfo(String team) {
         this.team = team;
     }
+
+    public String getTeam() {
+        return team;
+    }
 }
