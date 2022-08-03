@@ -22,13 +22,14 @@ public class Member {
 
     private String gender;
 
-    private String teamName;
-
     @Convert(converter = MemberStatusArrayConverter.class)
     private List<MemberStatus> memberStatuses = new ArrayList<>();
 
-    @ManyToOne
-    private MemberInfo memberInfo;
+    @Embedded
+    private ParticipantInfo participantInfo;
+
+    @Embedded
+    private OrganizerInfo organizerInfo;
 
     protected Member() {
     }
@@ -40,7 +41,7 @@ public class Member {
         this.password = password;
         this.localDate = localDate;
         this.gender = gender;
-        this.teamName = teamName;
+        this.organizerInfo = new OrganizerInfo(teamName);
         this.memberStatuses.add(MemberStatus.ORGANIZER);
     }
 
