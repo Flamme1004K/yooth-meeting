@@ -19,10 +19,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
-class MemberJoinServiceTest {
+class OrganizerMemberJoinServiceTest {
 
     @InjectMocks
-    private MemberJoinService memberJoinService;
+    private OrganizerMemberJoinService organizerMemberJoinService;
     @Mock
     private MemberRepository memberRepository;
 
@@ -33,11 +33,11 @@ class MemberJoinServiceTest {
         given(memberRepository.existsByLoginId(any())).willReturn(false);
         given(memberRepository.save(any())).willReturn(new Member(request.getId(), request.getEmail(), request.getPassword(), request.getLocalDate(), request.getGender(), request.getTeamName()));
         // when
-        OrganizerMemberJoinResponse organizerMemberJoinResponse = memberJoinService.joinOrganizerMember(request);
+        OrganizerMemberJoinResponse organizerMemberJoinResponse = organizerMemberJoinService.joinOrganizerMember(request);
 
         // then
         assertAll(() -> {
-            assertThat(organizerMemberJoinResponse.getId()).isEqualTo("aaaa");
+            assertThat(organizerMemberJoinResponse.getNo()).isEqualTo("aaaa");
         });
     }
 
@@ -49,7 +49,7 @@ class MemberJoinServiceTest {
 
         // then
         assertThatIllegalArgumentException().isThrownBy(() ->
-                memberJoinService.joinOrganizerMember(request)
+                organizerMemberJoinService.joinOrganizerMember(request)
         );
     }
 
@@ -61,7 +61,7 @@ class MemberJoinServiceTest {
 
         // then
         assertThatIllegalArgumentException().isThrownBy(() ->
-                memberJoinService.joinOrganizerMember(request)
+                organizerMemberJoinService.joinOrganizerMember(request)
         );
     }
 }

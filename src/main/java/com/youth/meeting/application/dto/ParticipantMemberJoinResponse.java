@@ -1,14 +1,14 @@
 package com.youth.meeting.application.dto;
 
-public class OrganizerMemberJoinResponse {
+public class ParticipantMemberJoinResponse {
 
     private Long no;
     private String loginId;
 
-    public OrganizerMemberJoinResponse() {
+    public ParticipantMemberJoinResponse() {
     }
 
-    public OrganizerMemberJoinResponse(Long no, String loginId) {
+    public ParticipantMemberJoinResponse(Long no, String loginId) {
         this.no = no;
         this.loginId = loginId;
     }

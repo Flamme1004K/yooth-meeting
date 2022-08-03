@@ -6,7 +6,7 @@ import javax.persistence.Embeddable;
 public class OrganizerInfo {
     private String team;
 
-    public OrganizerInfo() {
+    protected OrganizerInfo() {
     }
 
     public OrganizerInfo(String team) {

@@ -1,23 +1,24 @@
 package com.youth.meeting.application;
 
 import com.youth.meeting.application.dto.OrganizerMemberJoinRequest;
-import com.youth.meeting.application.dto.OrganizerMemberJoinResponse;
+import com.youth.meeting.application.dto.ParticipantMemberJoinRequest;
+import com.youth.meeting.application.dto.ParticipantMemberJoinResponse;
 import com.youth.meeting.domain.member.Member;
 import com.youth.meeting.domain.member.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class MemberJoinService {
+public class ParticipantMemberJoinService {
 
     private final MemberRepository memberRepository;
 
-    public MemberJoinService(MemberRepository memberRepository) {
+    public ParticipantMemberJoinService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
     @Transactional
-    public OrganizerMemberJoinResponse joinOrganizerMember(OrganizerMemberJoinRequest request) {
+    public ParticipantMemberJoinResponse joinParticipantMember(ParticipantMemberJoinRequest request) {
         existMember(request.getId());
 
         Member member = memberRepository.save(new Member(
@@ -26,9 +27,10 @@ public class MemberJoinService {
                 request.getPassword(),
                 request.getLocalDate(),
                 request.getGender(),
-                request.getTeamName()));
+                request.getDietaryRestrictions(),
+                request.getIntroduce()));
 
-        return new OrganizerMemberJoinResponse(member.getLoginId());
+        return new ParticipantMemberJoinResponse(member.getNo(), member.getLoginId());
     }
 
     private void existMember(String loginId) {

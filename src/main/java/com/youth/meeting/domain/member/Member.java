@@ -45,6 +45,21 @@ public class Member {
         this.memberStatuses.add(MemberStatus.ORGANIZER);
     }
 
+    public Member(String loginId, String email, String password, LocalDate localDate, String gender, String dietaryRestrictions, String introduce) {
+        PasswordValidator.validate(password);
+        this.loginId = loginId;
+        this.email = email;
+        this.password = password;
+        this.localDate = localDate;
+        this.gender = gender;
+        this.participantInfo = new ParticipantInfo(dietaryRestrictions, introduce);
+        this.memberStatuses.add(MemberStatus.PARTICIPANT);
+    }
+
+    public Long getNo() {
+        return no;
+    }
+
     public String getLoginId() {
         return loginId;
     }
