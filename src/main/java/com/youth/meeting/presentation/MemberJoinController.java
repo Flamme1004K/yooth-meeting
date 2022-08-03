@@ -2,14 +2,9 @@ package com.youth.meeting.presentation;
 
 import com.youth.meeting.application.OrganizerMemberJoinService;
 import com.youth.meeting.application.ParticipantMemberJoinService;
-import com.youth.meeting.application.dto.OrganizerMemberJoinRequest;
-import com.youth.meeting.application.dto.OrganizerMemberJoinResponse;
-import com.youth.meeting.application.dto.ParticipantMemberJoinRequest;
-import com.youth.meeting.application.dto.ParticipantMemberJoinResponse;
+import com.youth.meeting.application.dto.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -32,11 +27,29 @@ public class MemberJoinController {
         return ResponseEntity.created(URI.create("/join" + response.getNo())).build();
     }
 
+    @PatchMapping("/organizers/{memberNo}")
+    public ResponseEntity<Void> enrollOrganizerMember(
+            @PathVariable("memberNo") Long memberNo,
+            @RequestBody OrganizerMemberEnrollRequest request
+    ) {
+        organizerMemberJoinService.enrollOrganizerMember(memberNo, request);
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping("/participants")
     public ResponseEntity<Void> joinParticipantMember(
             @RequestBody ParticipantMemberJoinRequest request
     ) {
         ParticipantMemberJoinResponse response = participantMemberJoinService.joinParticipantMember(request);
         return ResponseEntity.created(URI.create("/join" + response.getNo())).build();
+    }
+
+    @PatchMapping("/participants/{memberNo}")
+    public ResponseEntity<Void> enrollParticipantMember(
+            @PathVariable("memberNo") Long memberNo,
+            @RequestBody ParticipantMemberEnrollRequest request
+    ) {
+        participantMemberJoinService.enrollParticipantMember(memberNo, request);
+        return ResponseEntity.noContent().build();
     }
 }

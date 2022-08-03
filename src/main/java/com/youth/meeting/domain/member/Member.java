@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.youth.meeting.domain.member.MemberStatus.ORGANIZER;
 import static com.youth.meeting.domain.member.MemberStatus.PARTICIPANT;
 
 @Entity
@@ -107,5 +108,19 @@ public class Member {
             throw new IllegalArgumentException("참가자 정보만 수정할 수 있습니다.");
         }
         this.participantInfo.changeInfo(dietaryRestrictions, introduce);
+    }
+
+    public void enrollOrganizer(String teamName) {
+        if(!memberStatuses.contains(ORGANIZER)) {
+            throw new IllegalArgumentException("이미 주최자로 등록되어 있습니다");
+        }
+        this.organizerInfo = new OrganizerInfo(teamName);
+    }
+
+    public void enrollParticipant(String dietaryRestrictions, String introduce) {
+        if(!memberStatuses.contains(PARTICIPANT)) {
+            throw new IllegalArgumentException("참가자 정보만 수정할 수 있습니다.");
+        }
+        this.participantInfo = new ParticipantInfo(dietaryRestrictions, introduce);
     }
 }

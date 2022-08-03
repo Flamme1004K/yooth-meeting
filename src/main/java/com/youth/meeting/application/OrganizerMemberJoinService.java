@@ -1,5 +1,6 @@
 package com.youth.meeting.application;
 
+import com.youth.meeting.application.dto.OrganizerMemberEnrollRequest;
 import com.youth.meeting.application.dto.OrganizerMemberJoinRequest;
 import com.youth.meeting.application.dto.OrganizerMemberJoinResponse;
 import com.youth.meeting.domain.member.Member;
@@ -37,5 +38,11 @@ public class OrganizerMemberJoinService {
         if (isExistMember) {
             throw new IllegalArgumentException("이미 가입한 사용자입니다.");
         }
+    }
+
+    @Transactional
+    public void enrollOrganizerMember(Long memberNo, OrganizerMemberEnrollRequest request) {
+        Member member = memberRepository.findById(memberNo).orElseThrow(() -> new IllegalArgumentException("해당 회원은 없습니다. : " + memberNo));
+        member.enrollOrganizer(request.getTeamName());
     }
 }

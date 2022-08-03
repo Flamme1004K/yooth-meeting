@@ -1,8 +1,6 @@
 package com.youth.meeting.application;
 
-import com.youth.meeting.application.dto.OrganizerMemberJoinRequest;
-import com.youth.meeting.application.dto.ParticipantMemberJoinRequest;
-import com.youth.meeting.application.dto.ParticipantMemberJoinResponse;
+import com.youth.meeting.application.dto.*;
 import com.youth.meeting.domain.member.Member;
 import com.youth.meeting.domain.member.MemberRepository;
 import org.springframework.stereotype.Service;
@@ -38,5 +36,11 @@ public class ParticipantMemberJoinService {
         if (isExistMember) {
             throw new IllegalArgumentException("이미 가입한 사용자입니다.");
         }
+    }
+
+    @Transactional
+    public void enrollParticipantMember(Long memberNo, ParticipantMemberEnrollRequest request) {
+        Member member = memberRepository.findById(memberNo).orElseThrow(() -> new IllegalArgumentException("해당 회원은 없습니다. : " + memberNo));
+        member.enrollParticipant(request.getDietaryRestrictions(), request.getIntroduce());
     }
 }
