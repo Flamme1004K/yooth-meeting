@@ -22,6 +22,8 @@ public class Member {
 
     private String gender;
 
+    private String teamName;
+
     @Convert(converter = MemberStatusArrayConverter.class)
     private List<MemberStatus> memberStatuses = new ArrayList<>();
 
@@ -31,13 +33,14 @@ public class Member {
     protected Member() {
     }
 
-    public Member(String loginId, String email, String password, LocalDate localDate, String gender) {
+    public Member(String loginId, String email, String password, LocalDate localDate, String gender, String teamName) {
         PasswordValidator.validate(password);
         this.loginId = loginId;
         this.email = email;
         this.password = password;
         this.localDate = localDate;
         this.gender = gender;
+        this.teamName = teamName;
         this.memberStatuses.add(MemberStatus.ORGANIZER);
     }
 

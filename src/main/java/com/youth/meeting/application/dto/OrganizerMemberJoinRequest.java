@@ -14,15 +14,18 @@ public class OrganizerMemberJoinRequest {
 
     private String gender;
 
+    private String teamName;
+
     public OrganizerMemberJoinRequest() {
     }
 
-    public OrganizerMemberJoinRequest(String id, String email, String password, LocalDate localDate, String gender) {
+    public OrganizerMemberJoinRequest(String id, String email, String password, LocalDate localDate, String gender, String teamName) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.localDate = localDate;
         this.gender = gender;
+        this.teamName = teamName;
     }
 
     public String getId() {
@@ -43,5 +46,9 @@ public class OrganizerMemberJoinRequest {
 
     public String getGender() {
         return gender;
+    }
+
+    public String getTeamName() {
+        return teamName;
     }
 }

@@ -18,18 +18,23 @@ public class MemberJoinService {
 
     @Transactional
     public OrganizerMemberJoinResponse joinOrganizerMember(OrganizerMemberJoinRequest request) {
-        Boolean isExistMember = memberRepository.existsByLoginId(request.getId());
-        if (isExistMember) {
-            throw new IllegalArgumentException("이미 가입한 사용자입니다.");
-        }
+        existMember(request.getId());
 
         Member member = memberRepository.save(new Member(
                 request.getId(),
                 request.getEmail(),
                 request.getPassword(),
                 request.getLocalDate(),
-                request.getGender()));
+                request.getGender(),
+                request.getTeamName()));
 
         return new OrganizerMemberJoinResponse(member.getLoginId());
+    }
+
+    private void existMember(String loginId) {
+        Boolean isExistMember = memberRepository.existsByLoginId(loginId);
+        if (isExistMember) {
+            throw new IllegalArgumentException("이미 가입한 사용자입니다.");
+        }
     }
 }
