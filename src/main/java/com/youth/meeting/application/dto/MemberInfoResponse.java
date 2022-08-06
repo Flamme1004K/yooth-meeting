@@ -1,12 +1,14 @@
 package com.youth.meeting.application.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.youth.meeting.domain.member.Member;
 
 import java.time.LocalDate;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 import static com.youth.meeting.domain.member.MemberStatus.ORGANIZER;
 import static com.youth.meeting.domain.member.MemberStatus.PARTICIPANT;
-
+@JsonInclude(value = NON_EMPTY)
 public class MemberInfoResponse {
 
     private Long no;
