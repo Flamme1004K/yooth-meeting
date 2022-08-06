@@ -1,5 +1,6 @@
 package com.youth.meeting.authenticate;
 
+import com.youth.meeting.application.TokenCreator;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
@@ -12,18 +13,18 @@ import java.util.Base64;
 import java.util.Date;
 
 @Component
-public class JsonWebTokenProvider {
+public class JsonWebTokenProvider implements TokenCreator {
 
     @Value("${jwt.password}")
     private String secretKey;
 
+    @Override
     public String createToken(String subject) {
         Date now = new Date();
         Date expiration = new Date(now.getTime() + Duration.ofDays(1).toMillis());
 
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .setIssuer("test")
                 .setIssuedAt(now)
                 .setExpiration(expiration)
                 .setSubject(subject)
@@ -36,9 +37,5 @@ public class JsonWebTokenProvider {
                 .setSigningKey(Base64.getEncoder().encodeToString(secretKey.getBytes()))
                 .parseClaimsJws(token)
                 .getBody();
-    }
-
-    private String BearerRemove(String token) {
-        return token.substring("Bearer ".length());
     }
 }

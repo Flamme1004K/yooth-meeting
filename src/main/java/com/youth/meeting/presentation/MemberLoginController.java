@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MemberLoginController {
 
-    private final JsonWebTokenProvider jsonWebTokenProvider;
     private final MemberLoginService memberLoginService;
 
-    public MemberLoginController(JsonWebTokenProvider jsonWebTokenProvider, MemberLoginService memberLoginService) {
-        this.jsonWebTokenProvider = jsonWebTokenProvider;
+    public MemberLoginController(MemberLoginService memberLoginService) {
         this.memberLoginService = memberLoginService;
     }
 
@@ -23,7 +21,7 @@ public class MemberLoginController {
             @RequestParam("loginId") String loginId,
             @RequestParam("password") String password
     ) {
-        memberLoginService.loginMember(loginId, password);
-        return ResponseEntity.ok(jsonWebTokenProvider.createToken(loginId));
+        String token = memberLoginService.loginMember(loginId, password);
+        return ResponseEntity.ok(token);
     }
 }
