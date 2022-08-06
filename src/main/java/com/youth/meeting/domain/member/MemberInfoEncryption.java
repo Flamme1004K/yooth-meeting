@@ -5,7 +5,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 
-public class AES256 {
+public class MemberInfoEncryption {
 
     public static final String alg = "AES/CBC/PKCS5Padding";
     private static final String key = "01234567890123456789012345678901";

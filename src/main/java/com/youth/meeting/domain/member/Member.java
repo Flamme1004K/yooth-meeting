@@ -2,13 +2,11 @@ package com.youth.meeting.domain.member;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import static com.youth.meeting.domain.member.AES256.decrypt;
-import static com.youth.meeting.domain.member.AES256.encrypt;
+import static com.youth.meeting.domain.member.MemberInfoEncryption.decrypt;
+import static com.youth.meeting.domain.member.MemberInfoEncryption.encrypt;
 import static com.youth.meeting.domain.member.MemberStatus.ORGANIZER;
 import static com.youth.meeting.domain.member.MemberStatus.PARTICIPANT;
 
