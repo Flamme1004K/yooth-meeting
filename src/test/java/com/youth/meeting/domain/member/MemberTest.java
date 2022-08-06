@@ -88,4 +88,24 @@ class MemberTest {
                 Member.JoinOrganizer("aaaa", "adsf!@34", "aaaa", LocalDate.of(2022, 03, 03), "name", "남", "채식주의자")
         );
     }
+
+    @Test
+    void 비밀번호를_체크한다() {
+        // given
+        Member member = Member.JoinOrganizer("aaaa", "adsf!@34", "adsf!@34", LocalDate.of(2022, 03, 03), "name", "남", "채식주의자");
+
+        // then
+        member.checkPassword("adsf!@34");
+    }
+
+    @Test
+    void 비밀번호를_체크시_다르면_예외를_발생시킨다() {
+        // given
+        Member member = Member.JoinOrganizer("aaaa", "adsf!@34", "adsf!@34", LocalDate.of(2022, 03, 03), "name", "남", "채식주의자");
+
+        // then
+        assertThatIllegalArgumentException().isThrownBy(() ->
+                member.checkPassword("adsf!@34ㅁㄴㅇㅁㄴㅇ")
+        );
+    }
 }
