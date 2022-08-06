@@ -19,15 +19,15 @@ public class JwtProvider {
 
     public String createToken(String subject) {
         Date now = new Date();
-        Date expiration = new Date(now.getTime() + Duration.ofDays(1).toMillis()); // 만료기간 1일
+        Date expiration = new Date(now.getTime() + Duration.ofDays(1).toMillis());
 
         return Jwts.builder()
-                .setHeaderParam(Header.TYPE, Header.JWT_TYPE) // (1)
+                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setIssuer("test")
                 .setIssuedAt(now)
                 .setExpiration(expiration)
                 .setSubject(subject)
-                .signWith(SignatureAlgorithm.HS256, Base64.getEncoder().encodeToString(secretKey.getBytes())) // 알고리즘, 시크릿 키
+                .signWith(SignatureAlgorithm.HS256, Base64.getEncoder().encodeToString(secretKey.getBytes()))
                 .compact();
     }
 
