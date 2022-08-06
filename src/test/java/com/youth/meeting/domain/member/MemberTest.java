@@ -14,4 +14,10 @@ class MemberTest {
         assertThat(member.getMemberStatuses()).containsExactly(MemberStatus.ORGANIZER);
     }
 
+    @Test
+    void 참여자를_생성한다() {
+        Member member = new Member("aaaa", "adsf!@34", "adsf!@34", LocalDate.of(2022, 03, 03), "name", "남", "adsf", "asdf");
+        assertThat(member.getMemberStatuses()).containsExactly(MemberStatus.PARTICIPANT);
+    }
+
 }
