@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.youth.meeting.domain.member.AES256.decrypt;
+import static com.youth.meeting.domain.member.AES256.encrypt;
 import static com.youth.meeting.domain.member.MemberStatus.ORGANIZER;
 import static com.youth.meeting.domain.member.MemberStatus.PARTICIPANT;
 
@@ -43,7 +45,7 @@ public class Member {
         PasswordValidator.validate(password);
         this.loginId = loginId;
         this.email = email;
-        this.password = password;
+        this.password = encrypt(password);
         this.birth = birth;
         this.name = name;
         this.gender = gender;
@@ -55,13 +57,15 @@ public class Member {
         PasswordValidator.validate(password);
         this.loginId = loginId;
         this.email = email;
-        this.password = password;
+        this.password = encrypt(password);
         this.birth = birth;
         this.name = name;
         this.gender = gender;
         this.participantInfo = new ParticipantInfo(dietaryRestrictions, introduce);
         this.memberStatuses.add(PARTICIPANT);
     }
+
+
 
     public Long getNo() {
         return no;
@@ -117,7 +121,7 @@ public class Member {
     }
 
     public void checkPassword(String password) {
-        if (!this.password.equals(password)) {
+        if (!decrypt(this.password).equals(password)) {
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
     }
