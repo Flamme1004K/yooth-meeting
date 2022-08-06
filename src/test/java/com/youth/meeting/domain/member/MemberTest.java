@@ -1,5 +1,6 @@
 package com.youth.meeting.domain.member;
 
+import com.youth.meeting.application.dto.ParticipantMemberJoinRequest;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -7,6 +8,8 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 
 class MemberTest {
 
@@ -77,5 +80,12 @@ class MemberTest {
 
         // then
         assertThatIllegalArgumentException().isThrownBy(() -> member.changeInfo("eeee", "eeee"));
+    }
+
+    @Test
+    void 가입시_비밀번호는_문자_숫자_특수문자_7자리_이상이_아니면_예외를_발생시킨다() {
+        assertThatIllegalArgumentException().isThrownBy(() ->
+                Member.JoinOrganizer("aaaa", "adsf!@34", "aaaa", LocalDate.of(2022, 03, 03), "name", "남", "채식주의자")
+        );
     }
 }
