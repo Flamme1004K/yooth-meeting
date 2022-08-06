@@ -41,4 +41,16 @@ class MemberTest {
         // then
         assertThat(member.getMemberStatuses()).containsExactly(MemberStatus.ORGANIZER, MemberStatus.PARTICIPANT);
     }
+
+    @Test
+    void 참가자는_주최자로도_참여할_수_있다() {
+        // given
+        Member member = Member.JoinParticipant("aaaa", "adsf!@34", "adsf!@34", LocalDate.of(2022, 03, 03), "name", "남", "adsf", "asdf");
+
+        // when
+        member.enrollOrganizer("채식주의자");
+
+        // then
+        assertThat(member.getOrganizerInfo().getTeam()).isEqualTo("채식주의자");
+    }
 }

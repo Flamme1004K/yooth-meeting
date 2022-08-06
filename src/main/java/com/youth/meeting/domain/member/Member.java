@@ -106,9 +106,7 @@ public class Member {
     }
 
     public void enrollOrganizer(String teamName) {
-        if (!memberStatuses.contains(ORGANIZER)) {
-            throw new IllegalArgumentException("이미 주최자로 등록되어 있습니다");
-        }
+        this.memberStatuses.add(ORGANIZER);
         this.organizerInfo = new OrganizerInfo(teamName);
     }
 
