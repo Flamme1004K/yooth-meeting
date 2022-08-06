@@ -3,7 +3,7 @@ package com.youth.meeting.presentation;
 import com.youth.meeting.application.OrganizerMemberJoinService;
 import com.youth.meeting.application.ParticipantMemberJoinService;
 import com.youth.meeting.application.dto.*;
-import com.youth.meeting.authenticate.JwtProvider;
+import com.youth.meeting.authenticate.JsonWebTokenProvider;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,15 +14,15 @@ public class MemberJoinController {
 
     private final OrganizerMemberJoinService organizerMemberJoinService;
     private final ParticipantMemberJoinService participantMemberJoinService;
-    private final JwtProvider jwtProvider;
+    private final JsonWebTokenProvider jsonWebTokenProvider;
 
-    public MemberJoinController(OrganizerMemberJoinService organizerMemberJoinService, ParticipantMemberJoinService participantMemberJoinService, JwtProvider jwtProvider) {
+    public MemberJoinController(OrganizerMemberJoinService organizerMemberJoinService, ParticipantMemberJoinService participantMemberJoinService, JsonWebTokenProvider jsonWebTokenProvider) {
         this.organizerMemberJoinService = organizerMemberJoinService;
         this.participantMemberJoinService = participantMemberJoinService;
-        this.jwtProvider = jwtProvider;
+        this.jsonWebTokenProvider = jsonWebTokenProvider;
     }
 
-    @PostMapping("/organizers")
+    @PostMapping("/join-organizers")
     public ResponseEntity<Void> joinOrganizerMember(
             @RequestBody OrganizerMemberJoinRequest request
     ) {
@@ -36,12 +36,12 @@ public class MemberJoinController {
             @RequestBody OrganizerMemberEnrollRequest request,
             @RequestHeader(value = "Authorization") String token
     ) {
-        jwtProvider.parseJwtToken(token);
+        jsonWebTokenProvider.parseJwtToken(token);
         organizerMemberJoinService.enrollOrganizerMember(memberNo, request);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/participants")
+    @PostMapping("/join-participants")
     public ResponseEntity<Void> joinParticipantMember(
             @RequestBody ParticipantMemberJoinRequest request
     ) {
@@ -55,7 +55,7 @@ public class MemberJoinController {
             @RequestBody ParticipantMemberEnrollRequest request,
             @RequestHeader(value = "Authorization") String token
     ) {
-        jwtProvider.parseJwtToken(token);
+        jsonWebTokenProvider.parseJwtToken(token);
         participantMemberJoinService.enrollParticipantMember(memberNo, request);
         return ResponseEntity.noContent().build();
     }

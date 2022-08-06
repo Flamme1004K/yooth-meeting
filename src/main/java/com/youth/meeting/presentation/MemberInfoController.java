@@ -2,7 +2,7 @@ package com.youth.meeting.presentation;
 
 import com.youth.meeting.application.MemberInfoService;
 import com.youth.meeting.application.dto.*;
-import com.youth.meeting.authenticate.JwtProvider;
+import com.youth.meeting.authenticate.JsonWebTokenProvider;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberInfoController {
 
     private final MemberInfoService organizerMemberJoinService;
-    private final JwtProvider jwtProvider;
+    private final JsonWebTokenProvider jsonWebTokenProvider;
 
-    public MemberInfoController(MemberInfoService organizerMemberJoinService, JwtProvider jwtProvider) {
+    public MemberInfoController(MemberInfoService organizerMemberJoinService, JsonWebTokenProvider jsonWebTokenProvider) {
         this.organizerMemberJoinService = organizerMemberJoinService;
-        this.jwtProvider = jwtProvider;
+        this.jsonWebTokenProvider = jsonWebTokenProvider;
     }
 
     @PostMapping("/members/{memberNo}")
@@ -25,7 +25,7 @@ public class MemberInfoController {
             @PathVariable("memberNo") Long memberNo,
             @RequestHeader(value = "Authorization") String token
     ) {
-        jwtProvider.parseJwtToken(token);
+        jsonWebTokenProvider.parseJwtToken(token);
         MemberInfoResponse response = organizerMemberJoinService.findMember(memberNo);
         return ResponseEntity.ok(response);
     }

@@ -1,22 +1,29 @@
 package com.youth.meeting.presentation;
 
-import com.youth.meeting.authenticate.JwtProvider;
+import com.youth.meeting.application.MemberLoginService;
+import com.youth.meeting.authenticate.JsonWebTokenProvider;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class MemberLoginController {
 
-    private final JwtProvider jwtProvider;
+    private final JsonWebTokenProvider jsonWebTokenProvider;
+    private final MemberLoginService memberLoginService;
 
-    public MemberLoginController(JwtProvider jwtProvider) {
-        this.jwtProvider = jwtProvider;
+    public MemberLoginController(JsonWebTokenProvider jsonWebTokenProvider, MemberLoginService memberLoginService) {
+        this.jsonWebTokenProvider = jsonWebTokenProvider;
+        this.memberLoginService = memberLoginService;
     }
 
-    @GetMapping(value = "/Login/{userId}")
-    public ResponseEntity<String> loginMember(@PathVariable("userId") String userId) {
-        return ResponseEntity.ok(jwtProvider.createToken(userId));
+    @GetMapping(value = "/login")
+    public ResponseEntity<String> loginMember(
+            @RequestParam("loginId") String loginId,
+            @RequestParam("password") String password
+    ) {
+        memberLoginService.loginMember(loginId, password);
+        return ResponseEntity.ok(jsonWebTokenProvider.createToken(loginId));
     }
 }
