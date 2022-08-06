@@ -36,4 +36,20 @@ public class OrganizerMemberJoinResponse {
     public String getLoginId() {
         return loginId;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getBirth() {
+        return birth;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
 }

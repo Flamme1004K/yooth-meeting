@@ -2,7 +2,6 @@ package com.youth.meeting.presentation;
 
 import com.youth.meeting.application.MemberUpdateService;
 import com.youth.meeting.application.dto.MemberUpdateRequest;
-import com.youth.meeting.authenticate.JsonWebTokenProvider;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
