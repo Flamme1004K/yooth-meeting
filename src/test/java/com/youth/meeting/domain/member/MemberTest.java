@@ -29,4 +29,16 @@ class MemberTest {
         // then
         assertThatIllegalArgumentException().isThrownBy(() -> member.changeInfo("aaaa", "bbbb"));
     }
+
+    @Test
+    void 주최자는_참가자로도_참여할_수_있다() {
+        // given
+        Member member = Member.JoinOrganizer("aaaa", "adsf!@34", "adsf!@34", LocalDate.of(2022, 03, 03), "name", "남", "채식주의자");
+
+        // when
+        member.enrollParticipant("aaaa","bbbb");
+
+        // then
+        assertThat(member.getMemberStatuses()).containsExactly(MemberStatus.ORGANIZER, MemberStatus.PARTICIPANT);
+    }
 }

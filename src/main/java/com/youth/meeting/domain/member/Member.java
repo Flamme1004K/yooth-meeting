@@ -3,7 +3,9 @@ package com.youth.meeting.domain.member;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.youth.meeting.domain.member.AES256.decrypt;
 import static com.youth.meeting.domain.member.AES256.encrypt;
@@ -30,7 +32,7 @@ public class Member {
     private String name;
 
     @Convert(converter = MemberStatusArrayConverter.class)
-    private List<MemberStatus> memberStatuses = new ArrayList<>();
+    private Set<MemberStatus> memberStatuses = new HashSet<>();
 
     @Embedded
     private ParticipantInfo participantInfo;
@@ -84,7 +86,7 @@ public class Member {
         return birth;
     }
 
-    public List<MemberStatus> getMemberStatuses() {
+    public Set<MemberStatus> getMemberStatuses() {
         return memberStatuses;
     }
 
@@ -111,9 +113,7 @@ public class Member {
     }
 
     public void enrollParticipant(String dietaryRestrictions, String introduce) {
-        if (!memberStatuses.contains(PARTICIPANT)) {
-            throw new IllegalArgumentException("참가자 정보만 수정할 수 있습니다.");
-        }
+        this.memberStatuses.add(PARTICIPANT);
         this.participantInfo = new ParticipantInfo(dietaryRestrictions, introduce);
     }
 
