@@ -32,7 +32,6 @@ public class JsonWebTokenProvider {
     }
 
     public Claims parseJwtToken(String token) {
-        token = BearerRemove(token);
         return Jwts.parser()
                 .setSigningKey(Base64.getEncoder().encodeToString(secretKey.getBytes()))
                 .parseClaimsJws(token)

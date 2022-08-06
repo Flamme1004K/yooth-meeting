@@ -79,16 +79,8 @@ public class Member {
         return name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public LocalDate getBirth() {
         return birth;
-    }
-
-    public String getGender() {
-        return gender;
     }
 
     public List<MemberStatus> getMemberStatuses() {
@@ -104,28 +96,28 @@ public class Member {
     }
 
     public void changeInfo(String dietaryRestrictions, String introduce) {
-        if(!memberStatuses.contains(PARTICIPANT)) {
+        if (!memberStatuses.contains(PARTICIPANT)) {
             throw new IllegalArgumentException("참가자 정보만 수정할 수 있습니다.");
         }
         this.participantInfo.changeInfo(dietaryRestrictions, introduce);
     }
 
     public void enrollOrganizer(String teamName) {
-        if(!memberStatuses.contains(ORGANIZER)) {
+        if (!memberStatuses.contains(ORGANIZER)) {
             throw new IllegalArgumentException("이미 주최자로 등록되어 있습니다");
         }
         this.organizerInfo = new OrganizerInfo(teamName);
     }
 
     public void enrollParticipant(String dietaryRestrictions, String introduce) {
-        if(!memberStatuses.contains(PARTICIPANT)) {
+        if (!memberStatuses.contains(PARTICIPANT)) {
             throw new IllegalArgumentException("참가자 정보만 수정할 수 있습니다.");
         }
         this.participantInfo = new ParticipantInfo(dietaryRestrictions, introduce);
     }
 
     public void checkPassword(String password) {
-        if(!this.password.equals(password)) {
+        if (!this.password.equals(password)) {
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
     }

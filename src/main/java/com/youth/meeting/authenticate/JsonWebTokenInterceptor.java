@@ -14,9 +14,9 @@ public class JsonWebTokenInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String token = request.getHeader("Authorization");
         jsonWebTokenProvider.parseJwtToken(token);
-        return HandlerInterceptor.super.preHandle(request, response, handler);
+        return true;
     }
 }

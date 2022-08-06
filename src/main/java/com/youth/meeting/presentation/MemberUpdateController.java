@@ -10,20 +10,16 @@ import org.springframework.web.bind.annotation.*;
 public class MemberUpdateController {
 
     private final MemberUpdateService memberUpdateService;
-    private final JsonWebTokenProvider jsonWebTokenProvider;
 
-    public MemberUpdateController(MemberUpdateService memberUpdateService, JsonWebTokenProvider jsonWebTokenProvider) {
+    public MemberUpdateController(MemberUpdateService memberUpdateService) {
         this.memberUpdateService = memberUpdateService;
-        this.jsonWebTokenProvider = jsonWebTokenProvider;
     }
 
     @PutMapping("/members/{memberNo}")
     public ResponseEntity<Void> findMemberInfo(
             @PathVariable("memberNo") Long memberNo,
-            @RequestBody MemberUpdateRequest request,
-            @RequestHeader(value = "Authorization") String token
+            @RequestBody MemberUpdateRequest request
     ) {
-        jsonWebTokenProvider.parseJwtToken(token);
         memberUpdateService.updateMember(memberNo, request);
         return ResponseEntity.noContent().build();
     }

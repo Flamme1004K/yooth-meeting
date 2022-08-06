@@ -1,12 +1,15 @@
 package com.youth.meeting.domain.member;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class ParticipantInfo {
 
+    @Column
     private String dietaryRestrictions;
 
+    @Column
     private String introduce;
 
     protected ParticipantInfo() {

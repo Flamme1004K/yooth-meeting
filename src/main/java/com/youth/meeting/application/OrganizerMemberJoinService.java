@@ -25,7 +25,7 @@ public class OrganizerMemberJoinService {
                 request.getId(),
                 request.getEmail(),
                 request.getPassword(),
-                request.getLocalDate(),
+                request.getBirth(),
                 request.getName(),
                 request.getGender(),
                 request.getTeamName()));

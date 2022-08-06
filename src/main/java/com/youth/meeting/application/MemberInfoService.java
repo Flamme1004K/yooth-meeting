@@ -18,15 +18,6 @@ public class MemberInfoService {
     @Transactional(readOnly = true)
     public MemberInfoResponse findMember(Long memberNo) {
         Member member = memberRepository.findById(memberNo).orElseThrow(() -> new IllegalArgumentException("해당 회원은 없습니다. : " + memberNo));
-        return new MemberInfoResponse(
-                member.getNo(),
-                member.getLoginId(),
-                member.getEmail(),
-                member.getName(),
-                member.getBirth(),
-                member.getOrganizerInfo().getTeam(),
-                member.getParticipantInfo().getDietaryRestrictions(),
-                member.getParticipantInfo().getIntroduce()
-        );
+        return MemberInfoResponse.of(member);
     }
 }

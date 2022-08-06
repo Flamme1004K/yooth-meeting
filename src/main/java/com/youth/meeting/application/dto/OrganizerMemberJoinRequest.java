@@ -12,7 +12,7 @@ public class OrganizerMemberJoinRequest {
 
     private String password;
 
-    private LocalDate localDate;
+    private LocalDate birth;
 
     private String gender;
 
@@ -21,12 +21,12 @@ public class OrganizerMemberJoinRequest {
     public OrganizerMemberJoinRequest() {
     }
 
-    public OrganizerMemberJoinRequest(String id, String email, String name, String password, LocalDate localDate, String gender, String teamName) {
+    public OrganizerMemberJoinRequest(String id, String email, String name, String password, LocalDate birth, String gender, String teamName) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.password = password;
-        this.localDate = localDate;
+        this.birth = birth;
         this.gender = gender;
         this.teamName = teamName;
     }
@@ -43,8 +43,8 @@ public class OrganizerMemberJoinRequest {
         return password;
     }
 
-    public LocalDate getLocalDate() {
-        return localDate;
+    public LocalDate getBirth() {
+        return birth;
     }
 
     public String getGender() {
