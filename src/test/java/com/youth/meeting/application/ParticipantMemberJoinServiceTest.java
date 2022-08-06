@@ -31,7 +31,7 @@ class ParticipantMemberJoinServiceTest {
         // given
         ParticipantMemberJoinRequest request = new ParticipantMemberJoinRequest("aaaa", "bbbbb@abc.com", "asdf!@#45", "홍길동", LocalDate.of(2022, 8, 3), "남", "나의상세.pdf", "안녕하세여");
         given(memberRepository.existsByLoginId(any())).willReturn(false);
-        given(memberRepository.save(any())).willReturn(new Member(request.getId(), request.getEmail(), request.getPassword(), request.getLocalDate(), request.getName(), request.getGender(), request.getDietaryRestrictions(), request.getIntroduce()));
+        given(memberRepository.save(any())).willReturn(Member.JoinParticipant(request.getId(), request.getEmail(), request.getPassword(), request.getBirth(), request.getName(), request.getGender(), request.getDietaryRestrictions(), request.getIntroduce()));
         // when
         ParticipantMemberJoinResponse participantMemberJoinResponse = participantMemberJoinService.joinParticipantMember(request);
 

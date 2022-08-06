@@ -31,7 +31,7 @@ class OrganizerMemberJoinServiceTest {
         // given
         OrganizerMemberJoinRequest request = new OrganizerMemberJoinRequest("aaaa", "bbbbb@abc.com", "홍길동", "asdf!@#45", LocalDate.of(2022, 8, 3), "남", "아보카도");
         given(memberRepository.existsByLoginId(any())).willReturn(false);
-        given(memberRepository.save(any())).willReturn(new Member(request.getId(), request.getEmail(), request.getPassword(), request.getBirth(), request.getGender(), request.getName(), request.getTeamName()));
+        given(memberRepository.save(any())).willReturn(Member.JoinOrganizer(request.getId(), request.getEmail(), request.getPassword(), request.getBirth(), request.getGender(), request.getName(), request.getTeamName()));
         // when
         OrganizerMemberJoinResponse organizerMemberJoinResponse = organizerMemberJoinService.joinOrganizerMember(request);
 

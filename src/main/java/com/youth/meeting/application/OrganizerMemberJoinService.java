@@ -8,6 +8,8 @@ import com.youth.meeting.domain.member.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.youth.meeting.domain.member.Member.JoinOrganizer;
+
 @Service
 public class OrganizerMemberJoinService {
 
@@ -21,7 +23,7 @@ public class OrganizerMemberJoinService {
     public OrganizerMemberJoinResponse joinOrganizerMember(OrganizerMemberJoinRequest request) {
         existMember(request.getId());
 
-        Member member = memberRepository.save(new Member(
+        Member member = memberRepository.save(JoinOrganizer(
                 request.getId(),
                 request.getEmail(),
                 request.getPassword(),

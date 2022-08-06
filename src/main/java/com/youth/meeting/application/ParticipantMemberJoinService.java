@@ -6,6 +6,8 @@ import com.youth.meeting.domain.member.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.youth.meeting.domain.member.Member.JoinParticipant;
+
 @Service
 public class ParticipantMemberJoinService {
 
@@ -19,11 +21,12 @@ public class ParticipantMemberJoinService {
     public ParticipantMemberJoinResponse joinParticipantMember(ParticipantMemberJoinRequest request) {
         existMember(request.getId());
 
-        Member member = memberRepository.save(new Member(
+        Member member = memberRepository.save(JoinParticipant(
                 request.getId(),
                 request.getEmail(),
                 request.getPassword(),
-                request.getLocalDate(),
+                request.getBirth(),
+                request.getName(),
                 request.getGender(),
                 request.getDietaryRestrictions(),
                 request.getIntroduce()));

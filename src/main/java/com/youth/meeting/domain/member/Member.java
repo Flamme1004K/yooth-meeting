@@ -41,7 +41,7 @@ public class Member {
     protected Member() {
     }
 
-    public Member(String loginId, String email, String password, LocalDate birth, String name, String gender, String teamName) {
+    private Member(String loginId, String email, String password, LocalDate birth, String name, String gender) {
         PasswordValidator.validate(password);
         this.loginId = loginId;
         this.email = email;
@@ -49,22 +49,19 @@ public class Member {
         this.birth = birth;
         this.name = name;
         this.gender = gender;
+    }
+
+    public Member(String loginId, String email, String password, LocalDate birth, String name, String gender, String teamName) {
+        this(loginId, email, password, birth, name, gender);
         this.organizerInfo = new OrganizerInfo(teamName);
         this.memberStatuses.add(MemberStatus.ORGANIZER);
     }
 
     public Member(String loginId, String email, String password, LocalDate birth, String name, String gender, String dietaryRestrictions, String introduce) {
-        PasswordValidator.validate(password);
-        this.loginId = loginId;
-        this.email = email;
-        this.password = encrypt(password);
-        this.birth = birth;
-        this.name = name;
-        this.gender = gender;
+        this(loginId, email, password, birth, name, gender);
         this.participantInfo = new ParticipantInfo(dietaryRestrictions, introduce);
         this.memberStatuses.add(PARTICIPANT);
     }
-
 
 
     public Long getNo() {
@@ -124,5 +121,13 @@ public class Member {
         if (!decrypt(this.password).equals(password)) {
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
+    }
+
+    public static Member JoinOrganizer(String loginId, String email, String password, LocalDate birth, String name, String gender, String teamName) {
+        return new Member(loginId, email, password, birth, name, gender, teamName);
+    }
+
+    public static Member JoinParticipant(String loginId, String email, String password, LocalDate birth, String name, String gender, String dietaryRestrictions, String introduce) {
+        return new Member(loginId, email, password, birth, name, gender, dietaryRestrictions, introduce);
     }
 }

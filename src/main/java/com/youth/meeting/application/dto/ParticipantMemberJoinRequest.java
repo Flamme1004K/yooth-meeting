@@ -12,7 +12,7 @@ public class ParticipantMemberJoinRequest {
 
     private String name;
 
-    private LocalDate localDate;
+    private LocalDate birth;
 
     private String gender;
 
@@ -23,12 +23,12 @@ public class ParticipantMemberJoinRequest {
     protected ParticipantMemberJoinRequest() {
     }
 
-    public ParticipantMemberJoinRequest(String id, String email, String password, String name, LocalDate localDate, String gender, String dietaryRestrictions, String introduce) {
+    public ParticipantMemberJoinRequest(String id, String email, String password, String name, LocalDate birth, String gender, String dietaryRestrictions, String introduce) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
-        this.localDate = localDate;
+        this.birth = birth;
         this.gender = gender;
         this.dietaryRestrictions = dietaryRestrictions;
         this.introduce = introduce;
@@ -50,8 +50,8 @@ public class ParticipantMemberJoinRequest {
         return password;
     }
 
-    public LocalDate getLocalDate() {
-        return localDate;
+    public LocalDate getBirth() {
+        return birth;
     }
 
     public String getGender() {
